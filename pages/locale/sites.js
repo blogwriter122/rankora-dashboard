@@ -28,7 +28,7 @@ export default function LocaleSites() {
   );
 }
 function AddLocalModal({ onClose, onDone }) {
-  const [f, setF] = useState({ name:'', niche:'', city:'', state:'', country:'US', language:'english', business_model:'rank_rent', wp_url:'', wp_user:'', wp_app_pass:'' });
+  const [f, setF] = useState({ name:'', niche:'', city:'', state:'', country:'US', language:'english', business_model:'rank_rent', scale:'single', wp_url:'', wp_user:'', wp_app_pass:'' });
   const [saving, setSaving] = useState(false);
   const set = k => e => setF({...f,[k]:e.target.value});
   async function save() {
@@ -45,8 +45,25 @@ function AddLocalModal({ onClose, onDone }) {
           <div className="field"><label>Niche</label><input value={f.niche} onChange={set('niche')} placeholder="plumber" /></div>
           <div className="field"><label>Business Model</label><select value={f.business_model} onChange={set('business_model')}><option value="rank_rent">Rank & Rent</option><option value="client_seo">Client SEO</option></select></div>
         </div>
+        <div className="field">
+          <label>Location Scale</label>
+          <div className="row" style={{gap:8}}>
+            {[
+              {k:'single',t:'Single City'},
+              {k:'multi',t:'Multi-City'},
+              {k:'nationwide',t:'Nationwide'},
+            ].map(o => (
+              <button key={o.k} type="button" className={`btn sm ${f.scale===o.k?'locale':'ghost'}`} onClick={()=>setF({...f,scale:o.k})} style={{flex:1}}>{o.t}</button>
+            ))}
+          </div>
+          <div style={{fontSize:11,color:'var(--text-faint)',marginTop:6}}>
+            {f.scale==='single' && 'One city — classic rank & rent (home + services + neighborhoods).'}
+            {f.scale==='multi' && 'Several cities, one business — per-city landing pages.'}
+            {f.scale==='nationwide' && 'State → city pyramid — national service coverage.'}
+          </div>
+        </div>
         <div className="row">
-          <div className="field"><label>City</label><input value={f.city} onChange={set('city')} placeholder="Dallas" /></div>
+          <div className="field"><label>{f.scale==='nationwide'?'Primary City (HQ)':'City'}</label><input value={f.city} onChange={set('city')} placeholder="Dallas" /></div>
           <div className="field"><label>State</label><input value={f.state} onChange={set('state')} placeholder="TX" /></div>
         </div>
         <div className="field"><label>WordPress URL</label><input value={f.wp_url} onChange={set('wp_url')} placeholder="https://yoursite.com" /></div>

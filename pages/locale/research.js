@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import { fetchers, api } from '../../lib/api';
 
@@ -17,6 +17,9 @@ export default function LocaleResearch() {
   const plan = site?.battle_plan;
   const battle = plan?.battle;
   const scalePlan = plan?.scalePlan;
+
+  // When a site is picked, default the scale selector to the site's saved scale
+  useEffect(() => { if (site?.scale) setScale(site.scale); }, [siteId]);
 
   const run = async (type, payload, label) => {
     setBusy(label);
