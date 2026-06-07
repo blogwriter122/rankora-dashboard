@@ -37,3 +37,4 @@ The dashboard sends commands to `NEXT_PUBLIC_ENGINE_URL`. Options:
 
 Reads (sites, jobs, trends, etc.) come straight from Supabase, so the
 Overview/Trends/Accounts pages work even when the engine API is offline.
+ 
