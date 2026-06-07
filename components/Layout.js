@@ -9,6 +9,7 @@ const NAV = [
     { href: '/jobs', icon: '⊟', label: 'Job Queue', engine: 'overview' },
   ]},
   { section: 'FORGE', color: 'forge', items: [
+    { href: '/forge/nichefinder', icon: '🔍', label: 'Niche Finder', engine: 'forge' },
     { href: '/forge/quickwrite', icon: '✎', label: 'Quick Write', engine: 'forge' },
     { href: '/forge/research',   icon: '⊕', label: 'Research',    engine: 'forge' },
     { href: '/forge/sites',      icon: '⬡', label: 'Sites',       engine: 'forge' },
