@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { fetchers } from '../../lib/api';
+import { fetchers, api } from '../../lib/api';
 
 export default function ForgeOffpage() {
   const { data: sites = [] } = useSWR('sites', fetchers.sites, { refreshInterval: 30000 });
@@ -38,7 +38,7 @@ export default function ForgeOffpage() {
               <td>{s.offpage_unlocked ? <span className="badge go">🔓 UNLOCKED</span> : <span className="badge low">🔒 LOCKED</span>}</td>
               <td className="mono">{s.daily_clicks||0}/day</td>
               <td className="mono">—</td>
-              <td>{s.offpage_unlocked ? <button className="btn ghost sm">Run</button> : '—'}</td>
+              <td>{s.offpage_unlocked ? <button className="btn ghost sm" onClick={async()=>{try{await api.forgeOffpage({siteId:s.id});alert('Offpage queued');}catch(e){alert(e.message);}}}>Run</button> : '—'}</td>
               <td>{s.offpage_unlocked ? <button className="btn ghost sm">Build PDF</button> : '—'}</td>
             </tr>
           ))}</tbody></table>

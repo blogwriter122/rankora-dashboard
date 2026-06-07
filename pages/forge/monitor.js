@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { fetchers } from '../../lib/api';
+import { fetchers, api } from '../../lib/api';
 
 export default function ForgeMonitor() {
   const { data: sites = [] } = useSWR('sites', fetchers.sites, { refreshInterval: 30000 });
@@ -23,7 +23,7 @@ export default function ForgeMonitor() {
               <td className="mono">{s.daily_clicks||0}</td>
               <td>{s.offpage_unlocked ? <span className="badge go">unlocked</span> : <span className="badge low">locked</span>}</td>
               <td className="mono">{s.koneqti_score ? `${s.koneqti_score}/100` : '—'}</td>
-              <td><button className="btn ghost sm">Check GSC</button></td>
+              <td><button className="btn ghost sm" onClick={async()=>{try{await api.forgeMonitor({siteId:s.id});alert('GSC check queued');}catch(e){alert(e.message);}}}>Check GSC</button></td>
             </tr>
           ))}</tbody></table>
         )}
