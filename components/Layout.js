@@ -22,6 +22,7 @@ const NAV = [
     { href: '/reach/accounts',   icon: '◉', label: 'Accounts',    engine: 'reach' },
     { href: '/reach/trends',     icon: '⚡', label: 'Trends',     engine: 'reach' },
     { href: '/reach/tools',      icon: '⚒', label: 'Tools',      engine: 'reach' },
+    { href: '/reach/keywords',   icon: '🔑', label: 'Keywords',   engine: 'reach' },
     { href: '/reach/analytics',  icon: '📊', label: 'Analytics',  engine: 'reach' },
   ]},
   { section: 'LOCALE', color: 'locale', items: [

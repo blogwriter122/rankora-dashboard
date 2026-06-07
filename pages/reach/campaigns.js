@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 import { fetchers, api } from '../../lib/api';
-const PLATFORMS = ['blogger','medium','linkedin','hubpages','quora','substack','reddit','wordpress_com'];
+const PLATFORMS = ['blogger','wordpress_com','medium','linkedin','hubpages','quora','substack','googlesites','devto','vocal','scribd','slideshare','notion','ghost','reddit','newsbreak'];
 export default function ReachCampaigns() {
   const { data: published = [] } = useSWR('published', fetchers.published, { refreshInterval: 8000 });
   const [keywords, setKeywords] = useState('');
