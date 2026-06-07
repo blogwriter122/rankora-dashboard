@@ -6,6 +6,7 @@ import { api } from '../lib/api';
 const NAV = [
   { section: null, items: [
     { href: '/', icon: '◆', label: 'Overview', engine: 'overview' },
+    { href: '/jobs', icon: '⊟', label: 'Job Queue', engine: 'overview' },
   ]},
   { section: 'FORGE', color: 'forge', items: [
     { href: '/forge/quickwrite', icon: '✎', label: 'Quick Write', engine: 'forge' },
@@ -21,6 +22,7 @@ const NAV = [
     { href: '/reach/accounts',   icon: '◉', label: 'Accounts',    engine: 'reach' },
     { href: '/reach/trends',     icon: '⚡', label: 'Trends',     engine: 'reach' },
     { href: '/reach/tools',      icon: '⚒', label: 'Tools',      engine: 'reach' },
+    { href: '/reach/analytics',  icon: '📊', label: 'Analytics',  engine: 'reach' },
   ]},
   { section: 'LOCALE', color: 'locale', items: [
     { href: '/locale/scorer',    icon: '◎', label: 'Niche Scorer', engine: 'locale' },
