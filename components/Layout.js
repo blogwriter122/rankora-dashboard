@@ -7,6 +7,8 @@ const NAV = [
   { section: null, items: [
     { href: '/', icon: '◆', label: 'Overview', engine: 'overview' },
     { href: '/jobs', icon: '⊟', label: 'Job Queue', engine: 'overview' },
+    { href: '/bots', icon: '◉', label: 'Bot Status', engine: 'overview' },
+    { href: '/config', icon: '⚙', label: 'System Config', engine: 'overview' },
   ]},
   { section: 'FORGE', color: 'forge', items: [
     { href: '/forge/nichefinder', icon: '🔍', label: 'Niche Finder', engine: 'forge' },

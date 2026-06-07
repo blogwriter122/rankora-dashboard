@@ -120,6 +120,11 @@ export default function MoneyPages() {
       </div>
 
       <div className="panel" style={{marginTop:14}}>
+        <div className="panel-title">📄 PDF Product Builder (Stream 4)</div>
+        <PdfBuilder sites={allSites} />
+      </div>
+
+      <div className="panel" style={{marginTop:14}}>
         <div className="panel-title">📤 Published Money Pages</div>
         {moneyPages.length === 0 ? <div className="empty">No money pages yet.</div> : (
           <table><thead><tr><th>Title</th><th>URL</th><th>When</th></tr></thead>
@@ -132,6 +137,36 @@ export default function MoneyPages() {
           ))}</tbody></table>
         )}
       </div>
+    </div>
+  );
+}
+
+function PdfBuilder({ sites }) {
+  const [siteId, setSiteId] = useState('');
+  const [type, setType] = useState('guide');
+  const [niche, setNiche] = useState('');
+  const [title, setTitle] = useState('');
+  const [msg, setMsg] = useState('');
+  const TYPES = [['guide','Guide $19'],['template','Template $9'],['checklist','Checklist $7'],['swipe','Swipe $12'],['course','Course $39']];
+  async function build() {
+    if (!siteId || !niche) return alert('Pick site + niche');
+    try {
+      const { api } = await import('../../lib/api');
+      await api.reachProduct({ siteId, type, niche, title, moneyUrl: sites.find(s=>s.id===siteId)?.wp_url });
+      setMsg('PDF product queued ✓'); setTimeout(()=>setMsg(''),4000);
+    } catch(e){ alert(e.message); }
+  }
+  return (
+    <div>
+      {msg && <div className="success-msg" style={{marginBottom:10}}>{msg}</div>}
+      <div className="row" style={{flexWrap:'wrap',gap:10}}>
+        <select value={siteId} onChange={e=>setSiteId(e.target.value)}><option value="">— site —</option>{sites.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}</select>
+        <select value={type} onChange={e=>setType(e.target.value)}>{TYPES.map(([k,l])=><option key={k} value={k}>{l}</option>)}</select>
+        <input value={niche} onChange={e=>setNiche(e.target.value)} placeholder="niche (bundles its articles)" />
+        <input value={title} onChange={e=>setTitle(e.target.value)} placeholder="title (optional)" />
+        <button className="btn reach sm" onClick={build} style={{whiteSpace:'nowrap'}}>Build PDF + List</button>
+      </div>
+      <p style={{fontSize:11,color:'var(--text-faint)',marginTop:8}}>Bundles published articles in the niche into a branded PDF, lists it on WooCommerce as a digital download (100% margin).</p>
     </div>
   );
 }
