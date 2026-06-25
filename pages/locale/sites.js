@@ -28,7 +28,7 @@ export default function LocaleSites() {
   );
 }
 function AddLocalModal({ onClose, onDone }) {
-  const [f, setF] = useState({ name:'', niche:'', city:'', state:'', country:'US', language:'english', business_model:'rank_rent', scale:'single', wp_url:'', wp_user:'', wp_app_pass:'' });
+  const [f, setF] = useState({ name:'', niche:'', city:'', state:'', country:'US', language:'english', business_model:'rank_rent', scale:'single', wp_url:'', wp_user:'', wp_app_pass:'', gbp_email:'', gbp_password:'' });
   const [saving, setSaving] = useState(false);
   const set = k => e => setF({...f,[k]:e.target.value});
   async function save() {
@@ -70,6 +70,14 @@ function AddLocalModal({ onClose, onDone }) {
         <div className="row">
           <div className="field"><label>WP Username</label><input value={f.wp_user} onChange={set('wp_user')} /></div>
           <div className="field"><label>WP App Password</label><input value={f.wp_app_pass} onChange={set('wp_app_pass')} /></div>
+        </div>
+        <div className="field">
+          <label>Google Business Profile login (optional — client-provided)</label>
+          <div style={{fontSize:11,color:'var(--text-faint)',marginBottom:6}}>If the client gives you GBP access, the bot can audit/post/manage it the same way it manages WordPress. Log into this site's Chrome profile once manually if 2FA is enabled — the session persists after that.</div>
+          <div className="row">
+            <input value={f.gbp_email} onChange={set('gbp_email')} placeholder="client@business.com" />
+            <input type="password" value={f.gbp_password} onChange={set('gbp_password')} placeholder="GBP password" />
+          </div>
         </div>
         <div className="flex-between" style={{marginTop:8}}>
           <button className="btn ghost" onClick={onClose}>Cancel</button>

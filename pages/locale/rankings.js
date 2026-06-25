@@ -33,6 +33,7 @@ export default function LocaleRankings() {
                 <td><div className="flex" style={{gap:6}}>
                   <button className="btn locale sm" onClick={() => run('rank_check', s.id)}>Check GSC</button>
                   <button className="btn ghost sm" onClick={() => run('audit', s.id)}>Audit</button>
+                  {s.gbp_email && <button className="btn ghost sm" onClick={() => run('gbp', s.id)}>GBP Audit</button>}
                 </div></td>
               </tr>
             );
@@ -53,6 +54,25 @@ export default function LocaleRankings() {
               ))}
             </div>
           ))}
+        </div>
+      )}
+
+      {localeSites.some(s => s.battle_plan?.gbpProfile) && (
+        <div className="panel" style={{marginTop:14}}>
+          <div className="panel-title">📍 Google Business Profile Snapshot</div>
+          {localeSites.filter(s => s.battle_plan?.gbpProfile).map(s => {
+            const gbp = s.battle_plan.gbpProfile;
+            return (
+              <div key={s.id} style={{marginBottom:12, fontSize:13}}>
+                <span style={{fontWeight:600}}>{s.name}</span>
+                {gbp.error ? (
+                  <span style={{color:'var(--text-faint)'}}> — {gbp.note}</span>
+                ) : (
+                  <span style={{color:'var(--text-dim)'}}> — rating {gbp.rating ?? '?'}, ~{gbp.reviewCount ?? '?'} reviews (checked {new Date(gbp.checkedAt).toLocaleDateString()})</span>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
